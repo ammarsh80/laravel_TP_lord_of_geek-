@@ -1,13 +1,20 @@
-<x-app-layout> 
+<x-app-layout>
 
 
 
 
 
-<h1>Détails d'un jeu</h1>
-<h2>Titre : {{$titi}}</h2>
+    <h1>Modifier le jeu numéro {{$jeu->id}}</h1>
+    <form action="">
+        <div>
+            <label for="titre">Titre :</label>
+        </div>
+        <input type="text" name="titre" value="{{$jeu->titre}}">
 
-<a href="{{route('jeux.edit', $titi->id)}}"> <x-edit-button>Modifier</x-primary-button>
+    </form>
+
+    <a href="{{route('jeux.edit', $jeu->id)}}"> <x-edit-button>Modifier</x-primary-button>
+    <a href=""> <x-save-button>Annuler</x-primary-button><a>
 
 
 

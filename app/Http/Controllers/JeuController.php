@@ -25,19 +25,28 @@ class JeuController extends Controller
      */
     public function create()
     {
-        return view('jeux.create', ['message'=>"ici mon message"]);
+        $jeu = new Jeu();
+        return view('jeux.create', ['jeu' => $jeu, 'titre' => $jeu]);           
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+/**
+ * Store a newly created resource in storage.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\Response
+ */
+public function store(Request $request)
+{
+    $jeu = new Jeu();
+    // Récupération des données envoyées dans la requête HTTP
+    $jeu->titre = $request->input('titre');
+
+    // Enregistrement du nouveau jeu en base de données
+    $jeu->save();
+
+    // Redirection vers la vue qui affiche les détails du nouveau jeu
+    return redirect()->route('jeux.show', ['id' => $jeu->id]);
+}
 
     /**
      * Display the specified resource.
@@ -48,7 +57,7 @@ class JeuController extends Controller
     public function show($id)
     {
         $jeux = Jeu::find($id);
-        return view('jeux.show', ['toto' => $id, 'titi' => $jeux]);
+        return view('jeux.show', ['toto' => $id, 'jeu' => $jeux]);
     }
 
     /**
@@ -60,7 +69,7 @@ class JeuController extends Controller
     public function edit($id)
     {
         $jeux = Jeu::find($id);
-        return view('jeux.edit', ['toto' => $id, 'titi' => $jeux]);    }
+        return view('jeux.edit', ['toto' => $id, 'jeu' => $jeux]);    }
 
     /**
      * Update the specified resource in storage.

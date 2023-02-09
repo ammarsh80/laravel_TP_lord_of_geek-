@@ -14,18 +14,14 @@
 
                     <table>
                         <caption>
-                            <h1>{{__('list of games')}}</h1>
+                            <h1 style="font-weight: bold;">{{__('list of all games')}}</h1>
                         </caption>
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>TITRE</th>
-                                <th>ACTION</th>
-                                <th>
-                                <a href="{{route('jeux.create')}}"> <x-create-button>CREATE</x-primary-button><a>
-
-
-                                </th>
+                                <th colspan="2">ACTION</th>
+                                <th><a href="{{route('jeux.create')}}"> <x-create-button>CREATE</x-primary-button><a></th>
                             </tr>
                         </thead>
                         @foreach($jeux as $jeu)
@@ -33,28 +29,14 @@
                             <td>
                                 <p>{{$jeu->id}}</p>
                             </td>
-                            <td>
-                                <a href="{{route('jeux.show', $jeu->id)}}">
-                                    {{$jeu-> titre}}
-                                </a>
+                            <td><a href="{{route('jeux.show', $jeu->id)}}">{{$jeu-> titre}}</a>
                             </td>
-                            <td>
-                                <a href="{{route('jeux.edit', $jeu->id)}}"> <x-edit-button>Modifier</x-primary-button>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{{route('jeux.show', $jeu->id)}}"> <x-show-button>Voir</x-primary-button>
-                                </a>
-                            </td>
-                            <td>
-                            <a href="{{route('jeux.show', $jeu->id)}}"> <x-delete-button>Supprimer</x-primary-button>
-                                </a>                            </td>
+                            <td><a href="{{route('jeux.edit', $jeu->id)}}"> <x-edit-button>Modifier</x-primary-button></a></td>
+                            <td><a href="{{route('jeux.show', $jeu->id)}}"> <x-show-button>Voir</x-primary-button></a></td>
+                            <td><a href=""> <x-delete-button>Supprimer</x-primary-button></a></td>
                         </tr>
                         @endforeach
-
-
                     </table>
-
                 </div>
             </div>
         </div>
