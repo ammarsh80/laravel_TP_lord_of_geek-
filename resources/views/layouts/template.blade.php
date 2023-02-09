@@ -11,9 +11,9 @@
 
 <body>
     <nav>
-        <a href="{{route ('jeux.index')}}">Index</a>
+        <!-- <a href="{{route ('jeux.index')}}">Index</a>
         <a href="{{route ('jeux.show',1)}}">Jeu n 1</a>
-        <a href="{{route ('jeux.create')}}">create</a>
+        <a href="{{route ('jeux.create')}}">Create</a> -->
     </nav>
     <div class="container">
         @yield('contenu')

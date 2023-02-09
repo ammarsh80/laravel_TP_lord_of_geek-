@@ -1,1 +1,2 @@
-<x-alert :message="$message"> </x-alert>
+<x-alert :message="$message" type="danger"></x-alert>
+

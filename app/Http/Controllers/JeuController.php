@@ -48,8 +48,7 @@ class JeuController extends Controller
     public function show($id)
     {
         $jeux = Jeu::find($id);
-        dd($jeux);
-        return view('jeux.show', ['toto' => $id, 'jeux' => '$jeux']);
+        return view('jeux.show', ['toto' => $id, 'titi' => $jeux]);
     }
 
     /**
@@ -60,8 +59,8 @@ class JeuController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $jeux = Jeu::find($id);
+        return view('jeux.edit', ['toto' => $id, 'titi' => $jeux]);    }
 
     /**
      * Update the specified resource in storage.
