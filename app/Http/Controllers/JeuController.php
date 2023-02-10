@@ -69,7 +69,8 @@ public function store(Request $request)
     public function edit($id)
     {
         $jeux = Jeu::find($id);
-        return view('jeux.edit', ['toto' => $id, 'jeu' => $jeux]);    }
+        return view('jeux.edit', ['toto' => $id, 'jeu' => $jeux]);  
+      }
 
     /**
      * Update the specified resource in storage.

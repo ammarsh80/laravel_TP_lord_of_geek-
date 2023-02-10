@@ -18,13 +18,16 @@
                     <x-nav-link :href="route('jeux.index')" :active="request()->routeIs('dashboard')">
                         {{ __('Jeux') }}
                     </x-nav-link>
-                  
-                    <x-nav-link :href="route('jeux.create')" :active="request()->routeIs('dashboard')">
-                        {{ __('Create') }}
+                   <x-nav-link :href="route('categories.index')" :active="request()->routeIs('dashboard')">
+                        {{ __('Catégories') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('jeux.show','titi')" :active="request()->routeIs('dashboard')">
-                        {{ __('Show') }}
+                   <x-nav-link :href="route('categories.index')" :active="request()->routeIs('dashboard')">
+                        {{ __('Tags') }}
                     </x-nav-link>
+                
+                 
+
+                   
                 
                 </div>
             </div>

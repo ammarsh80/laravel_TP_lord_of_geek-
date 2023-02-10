@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Jeu::factory(10)->create();
         \App\Models\Jeu::factory()->create('titre');
+        \App\Models\Categorie::factory(10)->create();
+
     }
 }

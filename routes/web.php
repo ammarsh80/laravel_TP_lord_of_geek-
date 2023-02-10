@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JeuController;
+use App\Http\Controllers\CategorieController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,8 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-// Route::get('/jeux', [JeuController::class, 'index'])->name('jeux.index');
 // Route::get('/jeux', [JeuController::class, 'show'])->name('jeux.show');
 // Route::get('/jeux/{id}', [JeuController::class, 'create'])->name('jeux.create');
 Route::resource('jeux', JeuController::class);
+Route::resource('categories', CategorieController::class);
 require __DIR__ . '/auth.php';
