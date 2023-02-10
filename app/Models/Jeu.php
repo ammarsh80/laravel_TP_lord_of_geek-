@@ -12,4 +12,10 @@ class Jeu extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = ['titre'];
+    public function categorie(){
+        return $this->belongsTo(Categorie::class);
+    }
+    public function tags(){
+        return $this->belongsToMany(Tag::class, 'pivot_tags');
+    }
 }

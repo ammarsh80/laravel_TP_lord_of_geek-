@@ -5,14 +5,23 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h1>Modifier le jeu numéro {{$jeu->id}}</h1>
-                    <form action="">
+                    <form action="{{route('jeux.update',$jeu->id)}}" method="POST">
+                        @method ('PUT') @csrf
                         <div>
-                            <label for="titre">Titre :</label>
+                            <label for="titre" class="block text-sm font-bold text-gray-700">
+                                {{__('Titre :')}}
+                            </label>
                         </div>
                         <input type="text" name="titre" value="{{$jeu->titre}}">
+                        @error('titre')
+                        <div class="text-red-500">{{$message}}</div>
+                        @enderror
+                        <button type="submit" class=" p-3 bg-green-500 text-white hover:bg-red-400">
+                            {{__('Save')}}
+                        </button>
                     </form>
-                    <a href="{{route('jeux.edit', $jeu->id)}}"> <x-save-button>Sauvgarder</x-primary-button>
-                            <a href=""> <x-delete-button>Annuler</x-primary-button><a>
+                    <x-buttons.delete :action="route('jeux.destroy',$jeu->id)">Suprimer</x-buttons.delete><a>
+
                 </div>
             </div>
         </div>

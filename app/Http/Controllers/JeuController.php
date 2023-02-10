@@ -14,7 +14,7 @@ class JeuController extends Controller
      */
     public function index()
     {
-        $jeux = Jeu::all();
+        $jeux = Jeu::orderBy('id', 'asc')->get();
         return view('jeux.index', ['jeux' => $jeux]);
     }
 
@@ -26,27 +26,27 @@ class JeuController extends Controller
     public function create()
     {
         $jeu = new Jeu();
-        return view('jeux.create', ['jeu' => $jeu, 'titre' => $jeu]);           
+        return view('jeux.create', ['jeu' => $jeu, 'titre' => $jeu]);
     }
 
-/**
- * Store a newly created resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return \Illuminate\Http\Response
- */
-public function store(Request $request)
-{
-    $jeu = new Jeu();
-    // Récupération des données envoyées dans la requête HTTP
-    $jeu->titre = $request->input('titre');
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $jeu = new Jeu();
+        // Récupération des données envoyées dans la requête HTTP
+        $jeu->titre = $request->input('titre');
 
-    // Enregistrement du nouveau jeu en base de données
-    $jeu->save();
+        // Enregistrement du nouveau jeu en base de données
+        $jeu->save();
 
-    // Redirection vers la vue qui affiche les détails du nouveau jeu
-    return redirect()->route('jeux.show', ['id' => $jeu->id]);
-}
+        // Redirection vers la vue qui affiche les détails du nouveau jeu
+        return redirect()->route('jeux.show', ['id' => $jeu->id]);
+    }
 
     /**
      * Display the specified resource.
@@ -57,7 +57,9 @@ public function store(Request $request)
     public function show($id)
     {
         $jeux = Jeu::find($id);
-        return view('jeux.show', ['toto' => $id, 'jeu' => $jeux]);
+        $categorie= $jeux->categorie;
+        // return view('jeux.show', ['toto' => $id, 'jeu' => $jeux, 'categorie'=>$categorie]);
+        return view('jeux.show', compact('jeux','categorie'));
     }
 
     /**
@@ -69,8 +71,8 @@ public function store(Request $request)
     public function edit($id)
     {
         $jeux = Jeu::find($id);
-        return view('jeux.edit', ['toto' => $id, 'jeu' => $jeux]);  
-      }
+        return view('jeux.edit', ['toto' => $id, 'jeu' => $jeux]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -81,7 +83,18 @@ public function store(Request $request)
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->validate([
+            'titre' => 'required|string|min:2|max:45'
+        ])) {
+
+            $titre = $request->input('titre');
+            $jeu = Jeu::find($id);
+            $jeu->titre = $titre;
+            $jeu->save();
+            return redirect()->route('jeux.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -92,6 +105,7 @@ public function store(Request $request)
      */
     public function destroy($id)
     {
-        //
+        Jeu::destroy($id);
+        return redirect()->route('jeux.index');
     }
 }

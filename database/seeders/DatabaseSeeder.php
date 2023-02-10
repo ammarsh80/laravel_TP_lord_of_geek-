@@ -19,12 +19,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        \App\Models\Jeu::factory(10)->create();
-        \App\Models\Jeu::factory()->create('titre');
         \App\Models\Categorie::factory(10)->create();
-        \App\Models\Categorie::factory()->create('titre');
+        \App\Models\Jeu::factory(10)->create();
         \App\Models\Tag::factory(50)->create();
-        \App\Models\Tag::factory()->create('titre');
+        $jeux = \App\Models\Jeu::all();
+        foreach ($jeux as $jeu){
+            $jeu->tags()->attach('1');
+        }
         
     }
 }

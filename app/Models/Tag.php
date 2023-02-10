@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
-    protected $table = 'jeux';
+    protected $table = 'tags';
     protected $primaryKey = 'id';
-    protected $fillable = ['titre'];
     public $timestamps = false;
+    protected $fillable = ['titre'];
+
+    public function jeux()
+    {
+        return $this->belongsToMany(Jeu::class, 'pivot_tags');
+    }
 }

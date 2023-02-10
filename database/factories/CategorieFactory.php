@@ -17,7 +17,8 @@ class CategorieFactory extends Factory
     public function definition()
     {
         return [
-            'titre'=>$this->faker->words(2,true),
+            'titre'=>$this->faker->unique()->words(2,true),
+            
         ];
     }
 }

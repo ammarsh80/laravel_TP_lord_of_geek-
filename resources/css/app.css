@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 
+.btn-red{
+    @apply inline-flex items-center 
+}
+

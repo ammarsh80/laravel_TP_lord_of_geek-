@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Symfony\Component\String\UnicodeString;
 
 return new class extends Migration
 {
@@ -13,10 +14,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categorie', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('titre');
-            $table->timestamps();
+            $table->unique('titre');
+            // $table->timestamps();
+
         });
     }
 

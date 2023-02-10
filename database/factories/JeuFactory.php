@@ -17,7 +17,8 @@ class JeuFactory extends Factory
     public function definition()
     {
         return [
-            'titre'=>$this->faker->words(3,true),
+            'titre'=>$this->faker->unique()->words(3,true),
+            'categorie_id'=>1
         ];
     }
 }

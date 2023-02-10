@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('jeux', function (Blueprint $table) {
             $table->id();
             $table->string('titre'); //Add this line
-            // $table->timestamps();
+            $table->unique('titre');
+            $table->unsignedBigInteger('categorie_id');
+            $table->foreign('categorie_id')->references('id')->on('categories');            // $table->timestamps();
 
         });
     }
