@@ -45,7 +45,8 @@ class TagController extends Controller
         $tag->save();
     
         // Redirection vers la vue qui affiche les détails du nouveau tag
-        return redirect()->route('tagx.show', ['id' => $tag->id]);    
+        // return redirect()->route('tags.show', ['id' => $tag->id]);    
+        return redirect()->route('tags.index');    
     }
 
     /**
@@ -68,7 +69,8 @@ class TagController extends Controller
     public function edit($id)
     {
         $tags = Tag::find($id);
-        return view('tags.edit', ['toto' => $id, 'tag' => $tags]);      }
+        return view('tags.edit', ['toto' => $id, 'tag' => $tags]);      
+    }
 
     /**
      * Update the specified resource in storage.
@@ -79,8 +81,18 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        if ($request->validate([
+            'titre' => 'required|string|min:2|max:45'
+        ])) {
+
+            $titre = $request->input('titre');
+            $tag = Tag::find($id);
+            $tag->titre = $titre;
+            $tag->save();
+            return redirect()->route('tags.index');
+        } else {
+            return redirect()->back();
+        }    }
 
     /**
      * Remove the specified resource from storage.
@@ -90,6 +102,6 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        Tag::destroy($id);
+        return redirect()->route('tags.index');    }
 }

@@ -40,12 +40,14 @@ class JeuController extends Controller
         $jeu = new Jeu();
         // Récupération des données envoyées dans la requête HTTP
         $jeu->titre = $request->input('titre');
+        $jeu->categorie_id = $request->input('categorie_id');
 
         // Enregistrement du nouveau jeu en base de données
         $jeu->save();
 
         // Redirection vers la vue qui affiche les détails du nouveau jeu
-        return redirect()->route('jeux.show', ['id' => $jeu->id]);
+        // return redirect()->route('jeux.show', ['id' => $jeu->id]);
+        return redirect()->route('jeux.index');
     }
 
     /**

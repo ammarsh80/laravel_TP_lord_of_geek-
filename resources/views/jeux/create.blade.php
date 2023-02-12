@@ -5,21 +5,22 @@
                 <div class="p-6 text-gray-900">
                     <form action="{{route('jeux.store')}}" method="POST">
                         @csrf
+
+                        <label for="titre" class="block text-sm font-bold text-gray-700">
+                            {{__('Ajouter le nom du nouveau jeu')}}
+                        </label>
+
+                        <input type="text" name="titre" required>
                         <div>
-                            <label for="titre" class="block text-sm font-bold text-gray-700">
-                                {{__('Ajouter le nom du nouveau jeu')}}
+                            <label for="categorie">
+                                {{__('Dans catégorie')}}
                             </label>
                         </div>
-                        <input type="text" name="titre" required>
-                        <button type="submit" class=" p-3 bg-green-500 text-white hover:bg-red-400">
-                            {{__('Enregistrer')}}
-                        </button>
+                        <input type="text" name="categorie_id" required>
+                        <div>
+                            <x-buttons.save :action="route('jeux.store')"></x-buttons.save>
                     </form>
-
-                    <a href=""> <x-delete-button>Annuler</x-primary-button><a>
-
-
-
+                    <x-buttons.cancel :action="route('jeux.index')"></x-buttons.cancel>
                 </div>
             </div>
         </div>

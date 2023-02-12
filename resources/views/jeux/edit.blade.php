@@ -16,14 +16,15 @@
                         @error('titre')
                         <div class="text-red-500">{{$message}}</div>
                         @enderror
-                        <button type="submit" class=" p-3 bg-green-500 text-white hover:bg-red-400">
-                            {{__('Save')}}
-                        </button>
+                        <div>
+                            <x-buttons.save :action="route('jeux.update', $jeu->id)"></x-buttons.save>
                     </form>
-                    <x-buttons.delete :action="route('jeux.destroy',$jeu->id)">Suprimer</x-buttons.delete><a>
-
+                    <x-buttons.cancel :action="route('jeux.index',$jeu->id)"></x-buttons.cancel>
+                
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>

@@ -5,15 +5,24 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h1>Modifier le tag numéro {{$tag->id}}</h1>
-                    <form action="">
+                    <form action="{{route('tags.update',$tag->id)}}" method="POST">
+                        @method ('PUT') @csrf
                         <div>
-                            <label for="titre">Titre :</label>
+                            <label for="titre" class="block text-sm font-bold text-gray-700">
+                                {{__('Titre :')}}
+                            </label>
                         </div>
                         <input type="text" name="titre" value="{{$tag->titre}}">
+                        @error('titre')
+                        <div class="text-red-500">{{$message}}</div>
+                        @enderror
+                        <div>
+                            <x-buttons.save :action="route('tags.update', $tag->id)"></x-buttons.save>
                     </form>
-                    <a href="{{route('tags.edit', $tag->id)}}"> <x-save-button>Sauvgarder</x-primary-button>
-                            <a href=""> <x-delete-button>Annuler</x-primary-button><a>
-                </div>
+                    <x-buttons.cancel :action="route('tags.index',$tag->id)"></x-buttons.cancel>
+                
+                
+                        </div>
             </div>
         </div>
     </div>

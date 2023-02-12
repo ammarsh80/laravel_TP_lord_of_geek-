@@ -31,9 +31,9 @@
                             </td>
                             <td><a href="{{route('jeux.show', $jeu->id)}}">{{$jeu-> titre}}</a>
                             </td>
-                            <td><a href="{{route('jeux.edit', $jeu->id)}}"> <x-edit-button>Modifier</x-primary-button></a></td>
-                            <td><a href="{{route('jeux.show', $jeu->id)}}"> <x-show-button>Voir</x-primary-button></a></td>
-                          <td>  <x-buttons.delete :action="route('jeux.destroy',$jeu->id)">Suprimer</x-buttons.delete><a></td>
+                            <td>  <x-buttons.edit :action="route('jeux.edit', $jeu->id)"></x-buttons.edit></td>
+                            <td>  <x-buttons.show :action="route('jeux.show', $jeu->id)"></x-buttons.show></td>
+                            <td>  <x-buttons.delete :action="route('jeux.destroy',$jeu->id)"></x-buttons.delete></td>
 
                         </tr>
                         @endforeach

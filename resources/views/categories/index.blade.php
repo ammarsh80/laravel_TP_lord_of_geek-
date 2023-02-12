@@ -30,9 +30,10 @@
                             </td>
                             <td><a href="{{route('categories.show', $categorie->id)}}">{{$categorie-> titre}}</a>
                             </td>
-                            <td><a href="{{route('categories.edit', $categorie->id)}}"> <x-edit-button>Modifier</x-primary-button></a></td>
-                            <td><a href="{{route('categories.show', $categorie->id)}}"> <x-show-button>Voir</x-primary-button></a></td>
-                            <td>  <x-buttons.delete :action="route('categories.destroy',$categorie->id)">Suprimer</x-buttons.delete><a></td>
+                            <td>  <x-buttons.edit :action="route('categories.edit', $categorie->id)"></x-buttons.edit></td>
+                            <td>  <x-buttons.show :action="route('categories.show', $categorie->id)"></x-buttons.show></td>
+                            <td>  <x-buttons.delete :action="route('categories.destroy',$categorie->id)"></x-buttons.delete></td>
+
                         </tr>
                         @endforeach
                     </table>

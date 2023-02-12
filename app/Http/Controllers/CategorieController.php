@@ -48,7 +48,9 @@ class CategorieController extends Controller
         $categorie->save();
     
         // Redirection vers la vue qui affiche les détails du nouveau categorie
-        return redirect()->route('categories.show', ['id' => $categorie->id]);    }
+        // return redirect()->route('categories.show', ['id' => $categorie->id]);   
+        return redirect()->route('categories.index');   
+     }
 
     /**
      * Display the specified resource.
@@ -83,8 +85,18 @@ class CategorieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        if ($request->validate([
+            'titre' => 'required|string|min:2|max:45'
+        ])) {
+
+            $titre = $request->input('titre');
+            $categorie = Categorie::find($id);
+            $categorie->titre = $titre;
+            $categorie->save();
+            return redirect()->route('categories.index');
+        } else {
+            return redirect()->back();
+        }    }
 
     /**
      * Remove the specified resource from storage.
@@ -94,6 +106,6 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        Categorie::destroy($id);
+        return redirect()->route('categories.index');    }
 }

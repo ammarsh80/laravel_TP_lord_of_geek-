@@ -5,15 +5,23 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h1>Modifier la catégorie numéro {{$categorie->id}}</h1>
-                    <form action="">
+                    <form action="{{route('categories.update',$categorie->id)}}" method="POST">
+                        @method ('PUT') @csrf
                         <div>
-                            <label for="titre">Titre :</label>
+                            <label for="titre" class="block text-sm font-bold text-gray-700">
+                                {{__('Titre :')}}
+                            </label>
                         </div>
                         <input type="text" name="titre" value="{{$categorie->titre}}">
+                        @error('titre')
+                        <div class="text-red-500">{{$message}}</div>
+                        @enderror
+                        <div>
+                            <x-buttons.save :action="route('categories.update', $categorie->id)"></x-buttons.save>
                     </form>
-                    <a href="{{route('categories.edit', $categorie->id)}}"> <x-save-button>Sauvgarder</x-primary-button>
-                            <a href=""> <x-delete-button>Annuler</x-primary-button><a>
-                </div>
+                    <x-buttons.cancel :action="route('categories.index',$categorie->id)"></x-buttons.cancel>
+                
+                        </div>
             </div>
         </div>
     </div>

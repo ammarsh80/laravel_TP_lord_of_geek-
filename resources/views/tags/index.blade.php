@@ -30,9 +30,10 @@
                             </td>
                             <td><a href="{{route('tags.show', $tag->id)}}">{{$tag-> titre}}</a>
                             </td>
-                            <td><a href="{{route('tags.edit', $tag->id)}}"> <x-edit-button>Modifier</x-primary-button></a></td>
-                            <td><a href="{{route('tags.show', $tag->id)}}"> <x-show-button>Voir</x-primary-button></a></td>
-                            <td>  <x-buttons.delete :action="route('tags.destroy',$tag->id)">Suprimer</x-buttons.delete><a></td>
+                            <td>  <x-buttons.edit :action="route('tags.edit', $tag->id)"></x-buttons.edit></td>
+                            <td>  <x-buttons.show :action="route('tags.show', $tag->id)"></x-buttons.show></td>
+                            <td>  <x-buttons.delete :action="route('tags.destroy',$tag->id)"></x-buttons.delete></td>
+
                         </tr>
                         @endforeach
                     </table>
