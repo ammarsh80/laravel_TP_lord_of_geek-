@@ -40,17 +40,32 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        $categorie = new Categorie();
-        // Récupération des données envoyées dans la requête HTTP
-        $categorie->titre = $request->input('titre');
+        // $categorie = new Categorie();
+        // // Récupération des données envoyées dans la requête HTTP
+        // $categorie->titre = $request->input('titre');
     
-        // Enregistrement du nouveau categorie en base de données
-        $categorie->save();
+        // // Enregistrement du nouveau categorie en base de données
+        // $categorie->save();
     
-        // Redirection vers la vue qui affiche les détails du nouveau categorie
-        // return redirect()->route('categories.show', ['id' => $categorie->id]);   
-        return redirect()->route('categories.index');   
-     }
+        // // Redirection vers la vue qui affiche les détails du nouveau categorie
+        // return redirect()->route('categories.show', ['category' => $categorie->id]);
+
+
+        if ($request->validate([
+            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+            ])) {
+    
+            $titre = $request->input('titre');
+            $categorie = new Categorie();
+    
+            $categorie->titre = $titre;
+            $categorie->save();
+            return redirect()->route('categories.show', ['category' => $categorie->id]);
+        } else {
+            return redirect()->back();
+        }   
+    }
+     
 
     /**
      * Display the specified resource.
@@ -60,10 +75,11 @@ class CategorieController extends Controller
      */
     public function show($id)
     {
-        $categories = Categorie::find($id);
-        // $jeux = $categories->jeux;
-        return view('categories.show', ['toto' => $id, 'categorie' => $categories]);    }
-        // return view('categories.show', compact('categories','jeux'));    }
+        $categorie = Categorie::find($id);
+        $jeux = $categorie->jeux;
+               // return view('categories.show', ['toto' => $id, 'categorie' => $categories]);   
+        return view('categories.show', compact('jeux','categorie'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -86,8 +102,8 @@ class CategorieController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->validate([
-            'titre' => 'required|string|min:2|max:45'
-        ])) {
+            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+            ])) {
 
             $titre = $request->input('titre');
             $categorie = Categorie::find($id);

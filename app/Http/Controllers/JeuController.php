@@ -37,19 +37,22 @@ class JeuController extends Controller
      */
     public function store(Request $request)
     {
+
+    if ($request->validate([
+        'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+    ])) {
+
+        $titre = $request->input('titre');
         $jeu = new Jeu();
-        // Récupération des données envoyées dans la requête HTTP
-        $jeu->titre = $request->input('titre');
         $jeu->categorie_id = $request->input('categorie_id');
 
-        // Enregistrement du nouveau jeu en base de données
+        $jeu->titre = $titre;
         $jeu->save();
-
-        // Redirection vers la vue qui affiche les détails du nouveau jeu
-        // return redirect()->route('jeux.show', ['id' => $jeu->id]);
-        return redirect()->route('jeux.index');
-    }
-
+        return redirect()->route('jeux.show', ['jeux' => $jeu->id]);
+    } else {
+        return redirect()->back();
+    }   
+}
     /**
      * Display the specified resource.
      *
@@ -86,8 +89,8 @@ class JeuController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->validate([
-            'titre' => 'required|string|min:2|max:45'
-        ])) {
+            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+            ])) {
 
             $titre = $request->input('titre');
             $jeu = Jeu::find($id);

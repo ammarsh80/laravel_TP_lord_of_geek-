@@ -21,15 +21,16 @@
                                 <th>ID</th>
                                 <th>TITRE</th>
                                 <th colspan="2">ACTION</th>
-                                <th><a href="{{route('jeux.create')}}"> <x-create-button>CREATE</x-primary-button><a></th>
+                                <th><a href="{{route('jeux.create')}}"> <x-create-button>Creer</x-primary-button><a></th>
                             </tr>
                         </thead>
                         @foreach($jeux as $jeu)
                         <tr>
+                           
                             <td>
                                 <p>{{$jeu->id}}</p>
                             </td>
-                            <td><a href="{{route('jeux.show', $jeu->id)}}">{{$jeu-> titre}}</a>
+                            <td><a href="{{route('jeux.show', $jeu->id)}}">{{$jeu-> titre}} </a>
                             </td>
                             <td>  <x-buttons.edit :action="route('jeux.edit', $jeu->id)"></x-buttons.edit></td>
                             <td>  <x-buttons.show :action="route('jeux.show', $jeu->id)"></x-buttons.show></td>

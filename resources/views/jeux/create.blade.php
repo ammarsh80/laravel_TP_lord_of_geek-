@@ -11,12 +11,22 @@
                         </label>
 
                         <input type="text" name="titre" required>
+
+                        @error('titre')
+                        <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+
+
                         <div>
                             <label for="categorie">
                                 {{__('Dans catégorie')}}
                             </label>
                         </div>
                         <input type="text" name="categorie_id" required>
+                        @error('titre')
+                        <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        
                         <div>
                             <x-buttons.save :action="route('jeux.store')"></x-buttons.save>
                     </form>

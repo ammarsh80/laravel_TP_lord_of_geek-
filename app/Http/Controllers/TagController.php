@@ -37,16 +37,19 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $tag = new Tag();
-        // Récupération des données envoyées dans la requête HTTP
-        $tag->titre = $request->input('titre');
+        if ($request->validate([
+            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+            ])) {
     
-        // Enregistrement du nouveau tag en base de données
-        $tag->save();
+            $titre = $request->input('titre');
+            $tag = new Tag();
     
-        // Redirection vers la vue qui affiche les détails du nouveau tag
-        // return redirect()->route('tags.show', ['id' => $tag->id]);    
-        return redirect()->route('tags.index');    
+            $tag->titre = $titre;
+            $tag->save();
+            return redirect()->route('tags.show', ['tag' => $tag->id]);
+        } else {
+            return redirect()->back();
+        } 
     }
 
     /**
@@ -57,8 +60,12 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        $tags = Tag::find($id);
-        return view('tags.show', ['toto' => $id, 'tag' => $tags]);    }
+        $tag = Tag::find($id);
+        $jeux= $tag->jeux;
+        // return view('tags.show', ['toto' => $id, 'tag' => $tags]);    
+        return view('tags.show', compact('jeux','tag'));
+
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -82,8 +89,8 @@ class TagController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->validate([
-            'titre' => 'required|string|min:2|max:45'
-        ])) {
+            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+            ])) {
 
             $titre = $request->input('titre');
             $tag = Tag::find($id);
@@ -92,7 +99,9 @@ class TagController extends Controller
             return redirect()->route('tags.index');
         } else {
             return redirect()->back();
-        }    }
+        }    
+    
+    }
 
     /**
      * Remove the specified resource from storage.

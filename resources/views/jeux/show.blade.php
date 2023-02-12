@@ -8,7 +8,10 @@
     <hr>
     <h2 style="font-weight: bold; font-size:1.5em;">Titre : {{$jeux->titre}}</h2>
     <p class="font-bold text-xl">Dans catégorie: 
-        {{$categorie->titre}}
+    <!-- <a href="{{}}"><x-buttons.category :action="route('categories.show', $categorie->id)"></x-buttons.category>{{$categorie->titre}}</a> -->
+    <a href="{{route('categories.show', $categorie->id)}}" class=" inline-flex items-center ml-1 mr-1 px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+        {{$categorie->titre}}</a>
+
     </p>
     <hr>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident sint architecto iure voluptas, accusantium doloribus dolores, eos voluptate dolor culpa cupiditate porro optio ipsum mollitia recusandae quisquam magni maiores earum.</p>

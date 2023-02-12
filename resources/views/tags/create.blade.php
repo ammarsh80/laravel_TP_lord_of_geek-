@@ -11,7 +11,9 @@
                         </label>
 
                         <input type="text" name="titre" required>
-
+                        @error('titre')
+                        <div class="text-red-500">{{ $message }}</div>
+                        @enderror
                         <div>
                             <x-buttons.save :action="route('tags.store')"></x-buttons.save>
                     </form>

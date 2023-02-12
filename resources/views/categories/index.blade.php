@@ -20,7 +20,7 @@
                                 <th>ID</th>
                                 <th>TITRE</th>
                                 <th colspan="2">ACTION</th>
-                                <th><a href="{{route('categories.create')}}"> <x-create-button>CREATE</x-primary-button><a></th>
+                                <th><a href="{{route('categories.create')}}"> <x-create-button>Creer</x-primary-button><a></th>
                             </tr>
                         </thead>
                         @foreach($categories as $categorie)

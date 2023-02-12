@@ -7,10 +7,22 @@
     <h1>Détails da la catégorie numéro {{$categorie->id}}</h1><br>
     <hr>
     <h2 style="font-weight: bold; font-size:1.5em;">Titre : {{$categorie->titre}}</h2>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident sint architecto iure voluptas, accusantium doloribus dolores, eos voluptate dolor culpa cupiditate porro optio ipsum mollitia recusandae quisquam magni maiores earum.</p>
-  
+<p>{{__('Liste de tous les jeux de cette catégorie')}}:</p>  
+<ul class="list-disc">
+
+    @foreach($jeux as $jeu)
+    <li>
+        {{$jeu->titre}}
+    </li>
+    
+    @endforeach
+</ul>
+
+<div>
+
     <x-buttons.edit :action="route('categories.edit', $categorie->id)"></x-buttons.edit>
     <x-buttons.delete :action="route('categories.destroy',$categorie->id)"></x-buttons.delete>
+</div>
 
                 </div>
             </div>

@@ -15,6 +15,12 @@ class Jeu extends Model
     public function categorie(){
         return $this->belongsTo(Categorie::class);
     }
+
+    /**
+     * Un jeu appartient à plusieurs tags
+     *
+     * @return void
+     */
     public function tags(){
         return $this->belongsToMany(Tag::class, 'pivot_tags');
     }
