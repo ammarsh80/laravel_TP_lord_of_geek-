@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Categorie;
 use App\Models\Jeu;
 use Illuminate\Http\Request;
 
@@ -61,10 +61,10 @@ class JeuController extends Controller
      */
     public function show($id)
     {
-        $jeux = Jeu::find($id);
-        $categorie= $jeux->categorie;
+        $jeu = Jeu::find($id);
+        $categorie= $jeu->categorie;
         // return view('jeux.show', ['toto' => $id, 'jeu' => $jeux, 'categorie'=>$categorie]);
-        return view('jeux.show', compact('jeux','categorie'));
+        return view('jeux.show', compact('jeu','categorie'));
     }
 
     /**
@@ -75,8 +75,12 @@ class JeuController extends Controller
      */
     public function edit($id)
     {
-        $jeux = Jeu::find($id);
-        return view('jeux.edit', ['toto' => $id, 'jeu' => $jeux]);
+        $jeu = Jeu::find($id);
+        $categorie= $jeu->categorie;
+        $categories= Categorie::all();
+        // return view('jeux.edit', ['toto' => $id, 'jeu' => $jeux]);
+        return view('jeux.edit', compact('jeu','categorie','categories'));
+
     }
 
     /**
@@ -89,14 +93,21 @@ class JeuController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->validate([
-            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/",
+            // 'description' => "required|string|min:3",
+            'categorie' => "required",
             ])) {
 
             $titre = $request->input('titre');
+            // $description = $request->input('description');
+            $categorie = $request->input('categorie');
             $jeu = Jeu::find($id);
             $jeu->titre = $titre;
+            // $jeu->description = $description;
+            $categorie= Categorie::find($categorie);
+            $jeu->categorie()->associate($categorie);
             $jeu->save();
-            return redirect()->route('jeux.index');
+            return redirect()->route('jeux.show', $jeu->id);
         } else {
             return redirect()->back();
         }

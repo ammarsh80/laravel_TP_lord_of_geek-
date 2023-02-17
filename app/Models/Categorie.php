@@ -12,6 +12,12 @@ class Categorie extends Model
     protected $primaryKey = "id";
     public $timestamps = false;
     protected $fillable = ['titre'];
+    
+    /**
+     * Une categorie a plusieurs jeux
+     *
+     * @return void
+     */
     public function jeux(){
         return $this->hasMany(Jeu::class);
     }

@@ -63,7 +63,7 @@ class TagController extends Controller
         $tag = Tag::find($id);
         $jeux= $tag->jeux;
         // return view('tags.show', ['toto' => $id, 'tag' => $tags]);    
-        return view('tags.show', compact('jeux','tag'));
+        return view('tags.show', compact('tag', 'jeux'));
 
     }
 
@@ -75,8 +75,10 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tags = Tag::find($id);
-        return view('tags.edit', ['toto' => $id, 'tag' => $tags]);      
+        $tag = Tag::find($id);
+        // return view('tags.edit', ['toto' => $id, 'tag' => $tags]);
+        return view('tags.edit', compact('tag'));
+      
     }
 
     /**

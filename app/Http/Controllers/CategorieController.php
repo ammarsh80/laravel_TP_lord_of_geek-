@@ -78,7 +78,7 @@ class CategorieController extends Controller
         $categorie = Categorie::find($id);
         $jeux = $categorie->jeux;
                // return view('categories.show', ['toto' => $id, 'categorie' => $categories]);   
-        return view('categories.show', compact('jeux','categorie'));
+        return view('categories.show', compact('categorie', 'jeux'));
     }
 
     /**
@@ -89,8 +89,10 @@ class CategorieController extends Controller
      */
     public function edit($id)
     {
-        $categories = Categorie::find($id);
-        return view('categories.edit', ['toto' => $id, 'categorie' => $categories]);      }
+        $categorie = Categorie::find($id);
+        // return view('categories.edit', ['toto' => $id, 'categorie' => $categories]);    
+        return view('categories.edit', compact('categorie'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -109,7 +111,7 @@ class CategorieController extends Controller
             $categorie = Categorie::find($id);
             $categorie->titre = $titre;
             $categorie->save();
-            return redirect()->route('categories.index');
+            return redirect()->route('categories.show', $categorie->id);
         } else {
             return redirect()->back();
         }    }

@@ -12,12 +12,18 @@ class Jeu extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = ['titre'];
+    
+    /**
+     * Un jeu appartient à une categorie
+     *
+     * @return void
+     */
     public function categorie(){
         return $this->belongsTo(Categorie::class);
     }
 
     /**
-     * Un jeu appartient à plusieurs tags
+     * Un jeu a plusieurs tags
      *
      * @return void
      */

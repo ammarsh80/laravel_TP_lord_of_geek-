@@ -24,6 +24,8 @@
                                 <th><a href="{{route('jeux.create')}}"> <x-create-button>Creer</x-primary-button><a></th>
                             </tr>
                         </thead>
+                       
+
                         @foreach($jeux as $jeu)
                         <tr>
                            
