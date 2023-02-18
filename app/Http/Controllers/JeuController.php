@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Categorie;
 use App\Models\Jeu;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class JeuController extends Controller
@@ -95,7 +96,7 @@ class JeuController extends Controller
         if ($request->validate([
             'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/",
             // 'description' => "required|string|min:3",
-            'categorie' => "required",
+            'categorie' => "string",
             ])) {
 
             $titre = $request->input('titre');
@@ -123,5 +124,37 @@ class JeuController extends Controller
     {
         Jeu::destroy($id);
         return redirect()->route('jeux.index');
+    }
+
+    /**
+     * créer ou récupère un tag et l'attach à un jeu
+     *
+     * @param Request $request
+     * @param [type] $id_jeu
+     * @return void
+     */
+    public function attach(Request $request, $id_jeu)
+    {
+        if ($request->validate([
+            'tag' => 'required|string|max:45|min:2'
+        ])) {
+            $titre_tag = $request->input('tag');
+            $tag = Tag::firstOrCreate([        //firstOfCreate() crée une nouveau tag sauf s'il existe déjà
+                'titre' => $titre_tag
+            ]);
+            
+            $jeu = Jeu::find($id_jeu);
+            $tags = $jeu->tags;
+            $bool = $tags->contains($tag->id);  // Vérifie si le tag existe déjà
+
+            if(!$bool) {
+                $jeu->tags()->attach($tag->id);     // la méthode attach sert à lier le tag trouvé (ou créé) au jeu enregistré en utilisant la relation tags définie dans la classe Jeu.
+            }
+
+            return redirect()->route('jeux.show', $jeu->id);
+        } else {
+            return redirect()->back();
+        }
+        die;
     }
 }

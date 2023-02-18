@@ -1,15 +1,26 @@
 <x-app-layout>
-<div class="py-12">
+
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Détails du tag n° {{$tag->id}}
+        </h2>
+    </x-slot>
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-    <hr><br>
-    <h1>Détails du tag numéro {{$tag->id}}</h1><br>
-    <hr>
-    <h2 style="font-weight: bold; font-size:1.5em;">Titre : {{$tag->titre}}</h2>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident sint architecto iure voluptas, accusantium doloribus dolores, eos voluptate dolor culpa cupiditate porro optio ipsum mollitia recusandae quisquam magni maiores earum.</p>
-    <x-buttons.edit :action="route('tags.edit', $tag->id)"></x-buttons.edit>
-    <x-buttons.delete :action="route('tags.destroy',$tag->id)"></x-buttons.delete>
+
+                    <h2 class="font-bold text-2xl">Titre : {{$tag->titre}}</h2>
+                    <h1 class="text-xl p-2 text-gray-400">Liste des jeux avec ce tags</h1>
+                    <ul class="p-1 mb-5">
+                        @foreach($jeux as $jeu)
+                        <li><a href="{{route('jeux.show', $jeu->id)}}">{{$jeu->titre}}</a></li>                   
+                        @endforeach
+                    </ul>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident sint architecto iure voluptas, accusantium doloribus dolores, eos voluptate dolor culpa cupiditate porro optio ipsum mollitia recusandae quisquam magni maiores earum.</p>
+
+                    <x-buttons.edit :action="route('tags.edit', $tag->id)"></x-buttons.edit>
+                    <x-buttons.delete :action="route('tags.destroy',$tag->id)"></x-buttons.delete>
                 </div>
             </div>
         </div>
