@@ -5,29 +5,21 @@
                 <div class="p-6 text-gray-900">
                     <form action="{{route('jeux.store')}}" method="POST">
                         @csrf
-
                         <label for="titre" class="block text-sm font-bold text-gray-700">
-                            {{__('Ajouter le nom du nouveau jeu')}}
+                            {{__('add the name of the new game')}}
                         </label>
-
                         <input type="text" name="titre" required>
-
                         @error('titre')
                         <div class="text-red-500">{{ $message }}</div>
                         @enderror
-
-
-                        <div>
-                            <label for="categorie">
-                                {{__('Dans catégorie')}}
-                            </label>
+                        <div class="form-group">
+                            <label for="description" class="block tracking-wide text-gray-700 text-xs font-bold mb-1 mt-5">Description du jeu:</label>
+                            <textarea name="description" id="description" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required></textarea>
+                            @error('description')
+                            <div class="text-red-500">{{$message}}</div>
+                            @enderror
                         </div>
-                        <input type="text" name="categorie_id" required>
-                        @error('titre')
-                        <div class="text-red-500">{{ $message }}</div>
-                        @enderror
-                        
-                        <div>
+                        <div> 
                             <x-buttons.save :action="route('jeux.store')"></x-buttons.save>
                     </form>
                     <x-buttons.cancel :action="route('jeux.index')"></x-buttons.cancel>

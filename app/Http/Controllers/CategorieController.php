@@ -52,7 +52,7 @@ class CategorieController extends Controller
 
 
         if ($request->validate([
-            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+            'titre' => "required|string|min:3|max:45|regex:/[a-zA-Z][a-zA-Z0-9À-ÿ]*('[a-zA-Z0-9À-ÿ]+)*/"
             ])) {
     
             $titre = $request->input('titre');
@@ -104,7 +104,7 @@ class CategorieController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->validate([
-            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
+            'titre' => "required|string|min:3|max:45|regex:/[a-zA-Z][a-zA-Z0-9À-ÿ]*('[a-zA-Z0-9À-ÿ]+)*/"
             ])) {
 
             $titre = $request->input('titre');

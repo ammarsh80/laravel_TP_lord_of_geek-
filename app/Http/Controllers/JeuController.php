@@ -40,14 +40,20 @@ class JeuController extends Controller
     {
 
     if ($request->validate([
-        'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/"
-    ])) {
+        'titre' => "required|string|min:3|max:45|regex:/[a-zA-Z][a-zA-Z0-9À-ÿ]*('[a-zA-Z0-9À-ÿ]+)*/",
+        'description' => 'string|min:3'
+
+        ])) {
 
         $titre = $request->input('titre');
+        $description = $request->input('description');
+
         $jeu = new Jeu();
-        $jeu->categorie_id = $request->input('categorie_id');
+        // $jeu->categorie_id = $request->input('categorie_id');
 
         $jeu->titre = $titre;
+        $jeu->description = $description;
+
         $jeu->save();
         return redirect()->route('jeux.show', ['jeux' => $jeu->id]);
     } else {
@@ -94,17 +100,17 @@ class JeuController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->validate([
-            'titre' => "required|string|min:3|max:45|regex:/^[a-zA-Z0-9]+(['\s][a-zA-Z0-9]+)*$/",
-            // 'description' => "required|string|min:3",
-            'categorie' => "string",
+            'titre' => "required|string|min:3|max:45|regex:/[a-zA-Z][a-zA-Z0-9À-ÿ]*('[a-zA-Z0-9À-ÿ]+)*/",
+            'description' => "string|min:3|max:255",
+            'categorie' => "string"
             ])) {
 
             $titre = $request->input('titre');
-            // $description = $request->input('description');
+            $description = $request->input('description');
             $categorie = $request->input('categorie');
             $jeu = Jeu::find($id);
             $jeu->titre = $titre;
-            // $jeu->description = $description;
+            $jeu->description = $description;
             $categorie= Categorie::find($categorie);
             $jeu->categorie()->associate($categorie);
             $jeu->save();
@@ -126,17 +132,17 @@ class JeuController extends Controller
         return redirect()->route('jeux.index');
     }
 
-    /**
-     * créer ou récupère un tag et l'attach à un jeu
-     *
-     * @param Request $request
-     * @param [type] $id_jeu
-     * @return void
-     */
+ /**
+  * créer ou récupère un tag et l'attach à un jeu
+  *
+  * @param Request $request
+  * @param [type] $id_jeu
+  * @return void
+  */
     public function attach(Request $request, $id_jeu)
     {
         if ($request->validate([
-            'tag' => 'required|string|max:45|min:2'
+            'tag' => 'required|string|max:45|min:3'
         ])) {
             $titre_tag = $request->input('tag');
             $tag = Tag::firstOrCreate([        //firstOfCreate() crée une nouveau tag sauf s'il existe déjà
@@ -156,5 +162,17 @@ class JeuController extends Controller
             return redirect()->back();
         }
         die;
+    }
+/**
+ * détache un tag d'un jeu
+ *
+ * @param [type] $id_jeu
+ * @param [type] $id_tag
+ * @return void
+ */
+    public function detach($id_jeu, $id_tag) {
+        $jeu = Jeu::find($id_jeu);
+        $jeu->tags()->detach($id_tag);
+        return redirect()->back();
     }
 }

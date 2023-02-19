@@ -5,11 +5,9 @@
                 <div class="p-6 text-gray-900">
                     <form action="{{route('categories.store')}}" method="POST">
                         @csrf
-
                         <label for="titre" class="block text-sm font-bold text-gray-700">
                             {{__('Ajouter le nom de la nouvelle catégorie')}}
                         </label>
-
                         <input type="text" name="titre" required>
                         @error('titre')
                         <div class="text-red-500">{{ $message }}</div>
@@ -18,7 +16,6 @@
                             <x-buttons.save :action="route('categories.store')"></x-buttons.save>
                     </form>
                     <x-buttons.cancel :action="route('categories.index')"></x-buttons.cancel>
-
                 </div>
             </div>
         </div>

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('titre'); //Add this line
             $table->unique('titre');
-            $table->unsignedBigInteger('categorie_id');
+            $table->string('description')->default('ici la description');
+            $table->unsignedBigInteger('categorie_id')->default(1);
             $table->foreign('categorie_id')->references('id')->on('categories');           
              // $table->timestamps();
 

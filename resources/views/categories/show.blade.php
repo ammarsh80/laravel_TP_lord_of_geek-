@@ -9,21 +9,14 @@
                     <h2 style="font-weight: bold; font-size:1.5em;">Titre : {{$categorie->titre}}</h2>
                     <p>{{__('Liste de tous les jeux de cette catégorie')}}:</p>
                     <ul class="list-disc">
-
                         @foreach($jeux as $jeu)
-                        <li><a href="{{route('jeux.show', $jeu->id)}}">{{$jeu->titre}}</a></li>                   
-
-                          
-
+                        <li><a href="{{route('jeux.show', $jeu->id)}}">{{$jeu->titre}}</a></li>
                         @endforeach
                     </ul>
-
                     <div>
-
                         <x-buttons.edit :action="route('categories.edit', $categorie->id)"></x-buttons.edit>
                         <x-buttons.delete :action="route('categories.destroy',$categorie->id)"></x-buttons.delete>
                     </div>
-
                 </div>
             </div>
         </div>

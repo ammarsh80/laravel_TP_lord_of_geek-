@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -20,9 +19,7 @@
                             <x-buttons.save :action="route('tags.update', $tag->id)"></x-buttons.save>
                     </form>
                     <x-buttons.cancel :action="route('tags.index',$tag->id)"></x-buttons.cancel>
-                
-                
-                        </div>
+                </div>
             </div>
         </div>
     </div>

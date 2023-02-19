@@ -20,8 +20,7 @@
                             <x-buttons.save :action="route('categories.update', $categorie->id)"></x-buttons.save>
                     </form>
                     <x-buttons.cancel :action="route('categories.index',$categorie->id)"></x-buttons.cancel>
-                
-                        </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <x-app-layout>
-<x-slot name="header">
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('list of all tags') }}
         </h2>
@@ -10,11 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     @section('titre', 'Tous les tags')
-
                     <table>
-                        <caption>
-                            <h1 style="font-weight: bold;">{{__('list of all tags')}}</h1>
-                        </caption>
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -30,10 +26,9 @@
                             </td>
                             <td><a href="{{route('tags.show', $tag->id)}}">{{$tag-> titre}}</a>
                             </td>
-                            <td>  <x-buttons.edit :action="route('tags.edit', $tag->id)"></x-buttons.edit></td>
-                            <td>  <x-buttons.show :action="route('tags.show', $tag->id)"></x-buttons.show></td>
-                            <td>  <x-buttons.delete :action="route('tags.destroy',$tag->id)"></x-buttons.delete></td>
-
+                            <td> <x-buttons.edit :action="route('tags.edit', $tag->id)"></x-buttons.edit></td>
+                            <td> <x-buttons.show :action="route('tags.show', $tag->id)"></x-buttons.show></td>
+                            <td> <x-buttons.delete :action="route('tags.destroy',$tag->id)"></x-buttons.delete></td>
                         </tr>
                         @endforeach
                     </table>
